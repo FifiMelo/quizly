@@ -8,7 +8,8 @@ client = openai.OpenAI(
 conversation = [
     {
         "role": "system",
-        "content": """Your task is to check what python script should return, and then give explanation.
+        "content": """Your task is to check what python script does,
+        and tell what is the value of variable "result", and then give explanation.
         Please give answer in format:
         answer: *what python script should return*
         explanation: *explanation*

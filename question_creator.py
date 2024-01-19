@@ -8,8 +8,9 @@ client = openai.OpenAI(
 conversation = [
     {
         "role": "system",
-        "content": """Your task is to create python puzzle chunks. Each chunk should end in print. Please,
-        don't provide anything else than the code, no questions, no answers, no hints, nothing.
+        "content": """Your task is to create python puzzle chunks. 
+        Each chunk should end in statement result = ..., variable that will store the result of the code.
+        Please, don't provide anything else than the code, no questions, no answers, no hints, nothing.
         """
     }
 ]
