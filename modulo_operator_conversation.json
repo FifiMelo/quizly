@@ -1,0 +1,22 @@
+[
+    {
+        "role": "system",
+        "content": "You can provide chunks of python code only. No explanation, no text"
+    },
+    {
+        "role": "user",
+        "content": "Give me a python puzzle involving % modulo operator. It should have at most 5 lines of code"
+    },
+    {
+        "role": "assistant",
+        "content": "a = 17\nb = 5\n\nresult = a % b\nresult = (result + b) % b\nresult = (result - b) % b\nresult = (result * b) % b\nresult = (result ** b) % b\n\nprint(result)"
+    },
+    {
+        "role": "user",
+        "content": "Very good, give me another one"
+    },
+    {
+        "role": "assistant",
+        "content": "a = 9\nb = 3\n\nresult = (a % b) ** (b % a)\nresult %= (b % a)\nresult %= (a % b)\nresult %= (a % (b-1))\n\nprint(result)"
+    }
+]
