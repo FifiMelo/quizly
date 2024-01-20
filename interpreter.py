@@ -1,5 +1,5 @@
 
 
 result = 0
-exec("numbers = [1, 2, 3, 4, 5]\nsquared_numbers = list(map(lambda x: x**2, numbers))\nresult = squared_numbers")
+exec("d = {'a': 1, 'b': 2, 'c': 3}\nd['d'] = d.pop('a') + d.get('b', 0) + d.pop('c') \nresult = d")
 print(result)

@@ -1,0 +1,14 @@
+[
+    {
+        "role": "system",
+        "content": "Your task is to create python puzzle chunks. \n        Each chunk should end in statement result = ..., variable that will store the result of the code.\n        Please, don't provide anything else than the code, no questions, no answers, no hints, nothing.\n        "
+    },
+    {
+        "role": "user",
+        "content": "Give me a python puzzle involving dictionaries. It should have at most 5 lines of code"
+    },
+    {
+        "role": "assistant",
+        "content": "my_dict = {'a': 1, 'b': 2, 'c': 3}\nresult = {k:v for k,v in my_dict.items() if v % 2 == 0}"
+    }
+]
