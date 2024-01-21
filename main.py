@@ -1,11 +1,16 @@
 from question_generator import QuestionGenerator
+from explanation_generator import ExplanationGenerator
 from puzzle import Puzzle
+from icecream import ic
 
 def main():
-    question_generator = QuestionGenerator("2d arrays")
-    print(question_generator.generate())
-    print(question_generator.generate(1))
-    print(question_generator.generate(-1))
+    question_generator = QuestionGenerator("modulo operator")
+    explanation_generator = ExplanationGenerator()
+    question = question_generator.generate_question()
+    explanation = explanation_generator.generate_explanation(question)
+    ic(question)
+    ic(explanation)
+
 
 
 

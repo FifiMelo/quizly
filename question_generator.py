@@ -8,6 +8,7 @@ class QuestionGenerator(Bot):
             Your task is to create python puzzle chunk. 
             The chunk should end in statement result = ..., variable that will store the result of the code.
             Please, don't provide anything else than the code, no questions, no answers, no hints, nothing.
+            Please, don't use random numbers, the puzzle must be deterministically answerable.
             """,
             additional_info = None,
             model = "gpt-3.5-turbo",
@@ -18,7 +19,7 @@ class QuestionGenerator(Bot):
         
 
     
-    def generate(
+    def generate_question(
             self,
             difficulty_change: int = 0
         ):
