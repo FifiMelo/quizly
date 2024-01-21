@@ -44,7 +44,7 @@ class Bot(openai.OpenAI):
             })
             stream = self.chat.completions.create(
                 model=self.model,
-                messages=self.context
+                messages=context
             )
             answer = stream.choices[0].message.content
 

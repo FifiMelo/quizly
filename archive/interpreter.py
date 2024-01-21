@@ -1,5 +1,5 @@
 
 
 result = 0
-exec('result = (23 + 10) % (17 - 5)')
+exec('(17 ** 5) % 6')
 print(result)

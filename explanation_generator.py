@@ -5,19 +5,20 @@ class ExplanationGenerator(Bot):
     def __init__(self):
         super(ExplanationGenerator, self).__init__(
             system_info = """
-            Your task is to check what python script does,
-            and tell what is the value of variable "result", and then give explanation.
+            Your task is to explain what python script does,
+            and then predict what is the value of variable "result".
+            Answer should be only value of the variable "result", do not provide anything else.
             Please give answer in format:
-            answer: *what python script should return*
             explanation: *explanation*
+            answer: *what is the value of varaible "result" at the end*
             do not provide anything more
             """,
             additional_info = """
-            Please, tell me what should return the following scripts, 
-            as well as the explanation
+            Please, explain me what the script does, 
+            and tell what is the value of varaible "result" at the end.
             """,
             model = "gpt-3.5-turbo",
-            continuous = True
+            continuous = False
         )
     
     def generate_explanation(
