@@ -8,10 +8,17 @@ client = openai.OpenAI(
 conversation = [
     {
         "role": "system",
-        "content": """Your task is to create python puzzle chunks. 
-        Each chunk should end in statement result = ..., variable that will store the result of the code.
-        Please, don't provide anything else than the code, no questions, no answers, no hints, nothing.
+        "content": """Your task is estimate difficulty of a python script puzzle,
+        at the scale of 1-100, as well as provide correct answer to the puzzle.
+        You will be given python script.
+        Please give the answer in format:
+        answer: *what python script should return*
+        difficulty: *difficulty on the scale of 1-100*
         """
+    },
+    {
+        "role": "user",
+        "content": "Please, tell me what should return the following scripts, as well as the difficulty"
     }
 ]
 
@@ -31,7 +38,8 @@ while True:
     })
 
     stream = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        #model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=conversation,
     )
     answer = stream.choices[0].message.content

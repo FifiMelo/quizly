@@ -8,7 +8,7 @@ class Bot(openai.OpenAI):
             additional_info: str = "", 
             model: int = "gpt-3.5-turbo",
             continuous: bool = False
-            ):
+        ):
         super(Bot, self).__init__(api_key = "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")
         self.continuous = continuous
         self.model = model
@@ -56,7 +56,8 @@ if __name__ == '__main__':
         system_info=""""Your task is to create python puzzle chunk. 
         The chunk should end in statement result = ..., variable that will store the result of the code.
         Please, don't provide anything else than the code, no questions, no answers, no hints, nothing.
-        """
+        """,
+        continuous=True
     )
     print(Question_generator.get(
         """
