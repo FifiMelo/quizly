@@ -5,7 +5,7 @@ class Bot(openai.OpenAI):
     def __init__(
             self, 
             system_info: str, 
-            additional_info: str = "", 
+            additional_info: str = None, 
             model: int = "gpt-3.5-turbo",
             continuous: bool = False
         ):
@@ -18,7 +18,7 @@ class Bot(openai.OpenAI):
                 "content": system_info
             }
         ]
-        if not additional_info == "":
+        if not additional_info is None:
             self.context.append({
                 "role": "user",
                 "content": additional_info
