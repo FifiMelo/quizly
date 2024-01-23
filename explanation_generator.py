@@ -25,6 +25,10 @@ class ExplanationGenerator(Bot):
             self,
             question_code: str
     ):
-        answer = self.get(question_code)
-        return answer
+        query = self.get(question_code)
+        explanation_index = query.find("explanation: ")
+        answer_index = query.find("answer: ")
+        answer = query[answer_index + len("answer: "):]
+        explanation = query[explanation_index + len("explanation: "):answer_index]
+        return answer, explanation
 
