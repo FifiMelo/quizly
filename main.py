@@ -4,12 +4,13 @@ from puzzle import Puzzle
 from icecream import ic
 
 def main():
+
     question_generator = QuestionGenerator("modulo operator")
     explanation_generator = ExplanationGenerator()
     question = question_generator.generate_question()
-    explanation = explanation_generator.generate_explanation(question)
+    answer, explanation = explanation_generator.generate_explanation(question)
     ic(question)
-    ic(explanation)
+    ic(answer, explanation)
 
 
 
