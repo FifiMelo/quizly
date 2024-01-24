@@ -1,4 +1,3 @@
-from icecream import ic
 
 
 def answers_correct(real_answer, answers):
@@ -10,14 +9,13 @@ def answers_correct(real_answer, answers):
     """
     answer_dict = dict()
     for answer in answers:
-        try:
-            exec(f"var = {answer}", answer_dict)
-        except NameError:
-            exec(f"var = '{answer}'", answer_dict)
+
+        # strings need to be treated separately (purpose of try catching)
+        exec(f"try:\n\tvar = {answer}\nexcept ValueError:\n\tvar = '{answer}'", answer_dict)
         if not answer_dict["var"] == real_answer:
             return False
     return True
     
 
 if __name__ == "__main__":
-    print(answers_correct(3, ["3", "3 "]))
+    print(answers_correct([1, 2], ["[1, 2]", "[1, 2] "]))
