@@ -2,7 +2,7 @@
 
 def answers_correct(real_answer, answers):
     """
-    Answers from chatgpt will always come as strings, but they can represent all posiible
+    Answers from chatgpt will always come as strings, but they can represent all possible
     types, numbers, arrays, dictionaries ect.
     Purpose of this function is to compare these answers, 
     and return True only if all of them are correct.
