@@ -27,7 +27,17 @@ def answers_correct(real_answer, answers):
 
         answer = transform_answer(answers[index])
         # strings need to be treated separately (purpose of try catching)
-        exec(f"try:\n\tvar = {answer}\nexcept ValueError:\n\tvar = '{answer}'", answer_dict)
+        exec(f"""
+try:
+    var = {answer}
+except Exception:
+    try:
+        var = '{answer}'
+    except SyntaxError:
+        print('{answer}')
+
+""", 
+    answer_dict)
         if not answer_dict["var"] == real_answer:
             return False
     return True
