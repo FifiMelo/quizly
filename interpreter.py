@@ -25,13 +25,20 @@ def answers_correct(real_answer, answers):
     answer_dict = dict()
     for index in range(len(answers)):
 
-        # chatgpt often answers this way
-        if not answers[index].find('The value of the "result" variable at the end is') == -1:
-            answers[index] = answers[index][len('The value of the "result" variable at the end is '):-1]
-            ic(answers[index])
-            pass
+        answer = transform_answer(answers[index])
         # strings need to be treated separately (purpose of try catching)
-        exec(f"try:\n\tvar = {answers[index]}\nexcept ValueError:\n\tvar = '{answers[index]}'", answer_dict)
+        exec(f"try:\n\tvar = {answer}\nexcept ValueError:\n\tvar = '{answer}'", answer_dict)
         if not answer_dict["var"] == real_answer:
             return False
     return True
+
+
+
+def transform_answer(answer: str):
+    phrase = 'The value of the "result" variable at the end is'
+    if answer[:len(phrase)] == phrase:
+        return answer[len(phrase):-1]
+    return answer
+
+if __name__ == '__main__':
+    print(transform_answer('The value of the "result" variable at the end is 11.'))
