@@ -35,9 +35,13 @@ def answers_correct(real_answer, answers):
 
 
 def transform_answer(answer: str):
-    phrase = 'The value of the "result" variable at the end is'
-    if answer[:len(phrase)] == phrase:
-        return answer[len(phrase):-1]
+    phrases = [
+        'The value of the "result" variable at the end is',
+        'The value of the variable "result" at the end is'
+    ]
+    for phrase in phrases:
+        if answer[:len(phrase)] == phrase:
+            return answer[len(phrase):-1]
     return answer
 
 if __name__ == '__main__':
