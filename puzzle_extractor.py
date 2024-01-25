@@ -11,6 +11,8 @@ def extract_puzzle(puzzle: str):
     """
     if not puzzle.find("```") == -1:
         puzzle = puzzle.split("```")[1]
+        if puzzle[:len("python")] == "python":
+            puzzle = puzzle[len("python"):]
 
     if not puzzle.find("#") == -1:
         puzzle = remove_comments(puzzle)
