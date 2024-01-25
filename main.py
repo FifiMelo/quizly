@@ -3,21 +3,50 @@ from explanation_generator import ExplanationGenerator
 from puzzle import Puzzle
 from icecream import ic
 from puzzle_extractor import extract_puzzle
-from interpreter import get_real_answer
+import interpreter
+import json
 
 def main():
     # initialization of bots
     question_generator = QuestionGenerator("arithmetics")
     explanation_generator = ExplanationGenerator()
 
+    difficulty_change = 0
     # creating question
-    question = question_generator.generate_question()
-    question = extract_puzzle(question)
+    while True:
+        question = question_generator.generate_question(difficulty_change = difficulty_change)
+        question = extract_puzzle(question)
+        real_answer, success = interpreter.get_real_answer(question)
+        if not success:
+            ic(question)
+            continue
+        explanator_answer, explanation = explanation_generator.generate_explanation(question)
 
-    explanator_answer, explanation = explanation_generator.generate_explanation(question)
-    real_answer, success = get_real_answer(question)
+        # place to generate different answers from different bots
+        # and to update difficulty_change variable
 
-    ic(question, explanator_answer, real_answer, success, explanation)
+
+        answers = [
+            explanator_answer
+        ]
+        if not interpreter.answers_correct(
+            real_answer = real_answer,
+            answers = answers
+            ):
+
+            ic(question, real_answer, answers)
+            continue
+    
+        with open("puzzle.json", "w") as puzzle:
+            json.dump({
+                "question": question,
+                "real answer": real_answer,
+                "explanation": explanation
+            }, puzzle)
+        break
+
+            
+    
     
 
 
