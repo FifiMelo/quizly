@@ -8,17 +8,17 @@ import json
 
 def main():
     # initialization of bots
-    question_generator = QuestionGenerator("arithmetics")
+    question_generator = QuestionGenerator("arrays")
     explanation_generator = ExplanationGenerator()
 
     difficulty_change = 0
     # creating question
     while True:
-        question = question_generator.generate_question(difficulty_change = difficulty_change)
-        question = extract_puzzle(question)
+        original_question = question_generator.generate_question(difficulty_change = difficulty_change)
+        question = extract_puzzle(original_question)
         real_answer, success = interpreter.get_real_answer(question)
         if not success:
-            ic(question)
+            ic(original_question, question)
             continue
         explanator_answer, explanation = explanation_generator.generate_explanation(question)
 
