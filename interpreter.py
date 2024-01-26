@@ -27,6 +27,8 @@ def answers_correct(real_answer, answers):
 
         answer = transform_answer(answers[index])
         # strings need to be treated separately (purpose of try catching)
+
+        # TODO fix this for strings does not work
         exec(f"""
 try:
     var = {answer}
@@ -34,7 +36,7 @@ except Exception:
     try:
         var = '{answer}'
     except SyntaxError:
-        print('{answer}')
+        var = "{answer}"
 
 """, 
     answer_dict)
