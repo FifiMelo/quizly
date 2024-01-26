@@ -33,10 +33,10 @@ Please, tell me what should return the following scripts, as well as the fake an
         fake_answer2_index = query.find("fake_answer2: ")
         fake_answer3_index = query.find("fake_answer3: ")
 
-        real_answer = query[real_answer_index:fake_answer1_index]
-        fake_answer1 = query[fake_answer1_index:fake_answer2_index]
-        fake_answer2 = query[fake_answer2_index:fake_answer3_index]
-        fake_answer3 = query[fake_answer3_index:]
+        real_answer = query[real_answer_index+len("correct_answer: "):fake_answer1_index-1]
+        fake_answer1 = query[fake_answer1_index+len("fake_answer1: "):fake_answer2_index-1]
+        fake_answer2 = query[fake_answer2_index+len("fake_answer2: "):fake_answer3_index-1]
+        fake_answer3 = query[fake_answer3_index+len("fake_answer3: "):-1]
 
         return real_answer, [fake_answer1, fake_answer2, fake_answer3]
         
