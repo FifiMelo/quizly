@@ -1,5 +1,6 @@
 from question_generator import QuestionGenerator
 from explanation_generator import ExplanationGenerator
+from fake_answers_generator import FakeAnswersGenerator
 from puzzle import Puzzle
 from icecream import ic
 from puzzle_extractor import extract_puzzle
@@ -8,8 +9,9 @@ import json
 
 def main():
     # initialization of bots
-    question_generator = QuestionGenerator("arrays")
+    question_generator = QuestionGenerator("strings")
     explanation_generator = ExplanationGenerator()
+    fake_answers_generator = FakeAnswersGenerator()
 
     difficulty_change = 0
     # creating question
@@ -21,13 +23,15 @@ def main():
             ic(original_question, question)
             continue
         explanator_answer, explanation = explanation_generator.generate_explanation(question)
+        fake_answers_generator_answer, fake_answers = fake_answers_generator.generate_fake_answers(question)
 
-        # place to generate different answers from different bots
-        # and to update difficulty_change variable
-
+        # TODO: place to generate different answers from different bots
+        # TODO: update difficulty_change variable
+        # TODO: check if any of fake answers is not correct by any chance
 
         answers = [
-            explanator_answer
+            explanator_answer,
+            fake_answers_generator_answer
         ]
         if not interpreter.answers_correct(
             real_answer = real_answer,
@@ -41,7 +45,8 @@ def main():
             json.dump({
                 "question": question,
                 "real answer": real_answer,
-                "explanation": explanation
+                "explanation": explanation,
+                "fake answers": fake_answers
             }, puzzle)
         break
 

@@ -27,7 +27,7 @@ Please, tell me what should return the following scripts, as well as the fake an
             question_code: str
     ):
         query = self.get(question_code)
-        ic(query)
+
         real_answer_index = query.find("correct_answer: ")
         fake_answer1_index = query.find("fake_answer1: ")
         fake_answer2_index = query.find("fake_answer2: ")
