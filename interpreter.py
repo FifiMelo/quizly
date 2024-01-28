@@ -28,18 +28,12 @@ def answers_correct(real_answer, answers):
         answer = transform_answer(answers[index])
         # strings need to be treated separately (purpose of try catching)
 
-        # TODO fix this for strings does not work
-        exec(f"""
-try:
-    var = {answer}
-except Exception:
-    try:
-        var = '{answer}'
-    except SyntaxError:
-        var = "{answer}"
+        try:
+            exec(f"""var = {answer}""", answer_dict)
+        except Exception as e:
+            ic(e)
+            exec(f"""var = "{answer}" """, answer_dict)
 
-""", 
-    answer_dict)
         if not answer_dict["var"] == real_answer:
             return False
     return True
@@ -49,7 +43,8 @@ except Exception:
 def transform_answer(answer: str):
     phrases = [
         'The value of the "result" variable at the end is',
-        'The value of the variable "result" at the end is'
+        'The value of the variable "result" at the end is',
+        'The value of variable "result" at the end is'
     ]
     for phrase in phrases:
         if answer[:len(phrase)] == phrase:
