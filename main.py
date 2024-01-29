@@ -25,22 +25,29 @@ def main():
         explanator_answer, explanation = explanation_generator.generate_explanation(question)
         fake_answers_generator_answer, fake_answers = fake_answers_generator.generate_fake_answers(question)
 
-        # TODO: place to generate different answers from different bots
+        # place to generate different answers from different bots
         # TODO: update difficulty_change variable
-        # TODO: check if any of fake answers is not correct by any chance
+
+        if not interpreter.check_answers(
+            real_answer = real_answer,
+            answers = fake_answers,
+            correct_answers = False
+        ):
+            ic("One of the fake answers seems to be correct", question, real_answer, fake_answers)
+            continue
 
         answers = [
             explanator_answer,
-            fake_answers_generator_answer
+            #fake_answers_generator_answer
         ]
-        if not interpreter.answers_correct(
+        if not interpreter.check_answers(
             real_answer = real_answer,
             answers = answers
             ):
 
-            ic(question, real_answer, answers)
+            ic("Answer of one of the bot seems incorrect", question, real_answer, answers)
             continue
-    
+
         with open("puzzle.json", "w") as puzzle:
             json.dump({
                 "question": question,
