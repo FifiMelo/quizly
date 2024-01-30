@@ -9,7 +9,7 @@ import json
 
 def main():
     # initialization of bots
-    question_generator = QuestionGenerator("strings")
+    question_generator = QuestionGenerator("lambda")
     explanation_generator = ExplanationGenerator()
     fake_answers_generator = FakeAnswersGenerator()
 
@@ -23,18 +23,23 @@ def main():
             ic(original_question, question)
             continue
         explanator_answer, explanation = explanation_generator.generate_explanation(question)
-        fake_answers_generator_answer, fake_answers = fake_answers_generator.generate_fake_answers(question)
+        
 
         # place to generate different answers from different bots
         # TODO: update difficulty_change variable
 
-        if not interpreter.check_answers(
-            real_answer = real_answer,
-            answers = fake_answers,
-            correct_answers = False
-        ):
-            ic("One of the fake answers seems to be correct", question, real_answer, fake_answers)
-            continue
+
+        while True:
+            _, fake_answers = fake_answers_generator.generate_fake_answers(question)
+
+            if interpreter.check_answers(
+                real_answer = real_answer,
+                answers = fake_answers,
+                correct_answers = False
+            ):
+                break
+            print("One of the fake answers seems to be correct, creating new fake answers")
+            ic(question, real_answer, fake_answers)
 
         answers = [
             explanator_answer,
@@ -44,8 +49,8 @@ def main():
             real_answer = real_answer,
             answers = answers
             ):
-
-            ic("Answer of one of the bot seems incorrect", question, real_answer, answers)
+            print("Answer of one of the bot seems incorrect")
+            ic(question, real_answer, answers)
             continue
 
         with open("puzzle.json", "w") as puzzle:
