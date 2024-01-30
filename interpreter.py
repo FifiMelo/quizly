@@ -35,7 +35,7 @@ def check_answers(real_answer, answers, correct_answers = True):
         try:
             exec(f"""var = {answer}""", answer_dict)
         except Exception as e:
-            ic(e, answer)
+            print(e, answer)
             exec(f"""var = "{answer}" """, answer_dict)
 
         if (answer_dict["var"] == real_answer) != correct_answers:
@@ -49,7 +49,8 @@ def transform_answer(answer: str):
         'The value of the "result" variable at the end is',
         'The value of the variable "result" at the end is',
         'The value of variable "result" at the end is',
-        'The value of the variable "result" at the end will be'
+        'The value of the variable "result" at the end will be',
+        'The value of the variable "result" will be'
     ]
     for phrase in phrases:
         if answer[:len(phrase)] == phrase:
