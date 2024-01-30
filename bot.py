@@ -1,5 +1,7 @@
 import openai
 import copy
+import os
+from dotenv import load_dotenv
 
 class Bot(openai.OpenAI):
     def __init__(
@@ -9,7 +11,8 @@ class Bot(openai.OpenAI):
             model: int = "gpt-3.5-turbo",
             continuous: bool = False
         ):
-        super(Bot, self).__init__(api_key = "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")
+        load_dotenv()
+        super(Bot, self).__init__(api_key = os.environ.get("OPENAI_KEY"))
         self.continuous = continuous
         self.model = model
         self.context = [
