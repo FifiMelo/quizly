@@ -58,6 +58,7 @@ def transform_answer(answer: str):
     for phrase in phrases:
         if answer[:len(phrase)] == phrase:
             return answer[len(phrase):-1]
+    answer = answer.replace('\n', '')
     return answer
 
 if __name__ == '__main__':
