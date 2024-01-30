@@ -31,12 +31,15 @@ def check_answers(real_answer, answers, correct_answers = True):
 
         answer = transform_answer(answers[index])
         # strings need to be treated separately (purpose of try catching)
-
         try:
-            exec(f"""var = {answer}""", answer_dict)
+            try:
+                exec(f"""var = {answer}""", answer_dict)
+            except Exception as e:
+                print(e, answer)
+                exec(f"""var = "{answer}" """, answer_dict)
         except Exception as e:
-            print(e, answer)
-            exec(f"""var = "{answer}" """, answer_dict)
+            ic(e, real_answer, answers)
+            return False
 
         if (answer_dict["var"] == real_answer) != correct_answers:
             return False
