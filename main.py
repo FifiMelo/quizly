@@ -1,15 +1,19 @@
 from question_generator import QuestionGenerator
 from explanation_generator import ExplanationGenerator
 from fake_answers_generator import FakeAnswersGenerator
-from puzzle import Puzzle
 from icecream import ic
 from puzzle_extractor import extract_puzzle
+from dotenv import load_dotenv
 import interpreter
 import json
+import os
+
 
 def main():
+
+    load_dotenv()
     # initialization of bots
-    question_generator = QuestionGenerator("lambda")
+    question_generator = QuestionGenerator(os.environ.get('TAG'))
     explanation_generator = ExplanationGenerator()
     fake_answers_generator = FakeAnswersGenerator()
 
