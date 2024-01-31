@@ -44,6 +44,51 @@ Very nice, please give me next one, on same difficulty level.
         return self.get(
             request = request
         )
+    def generate_question(self,
+        previous_question: str = None,
+        difficulty_change: int = 0
+        ):
+        if previous_question is None:
+            request = f"""
+Give me one python puzzle involving {self.tag}. It should have at most 5 lines of code.
+Store the value to be estimated in variable "result".
+"""
+            return self.get(
+                request = request
+            )
+        previous_conversation = (
+                    {
+                        "role": "user",
+                        "content": f"""
+                        Give me one python puzzle involving {self.tag}. It should have at most 5 lines of code.
+Store the value to be estimated in variable "result".
+"""
+                    },
+                    {
+                        "role": "assistant",
+                        "content": previous_question
+                    }
+                )
+        
+        if difficulty_change == 0:
+                request = """
+Very nice, please give me next one, on the same difficulty level.
+"""
+        if difficulty_change > 0:
+                request = """
+Very nice, but this time please give me something slightly more challenging.
+"""
+        if difficulty_change < 0:
+                request = """
+Very nice, but this one was too hard. Please give me something a little bit easier.
+"""
+
+        return self.get(
+             request = request,
+             previous_conversation = previous_conversation
+        )
+            
+
 
 
 

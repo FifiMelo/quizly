@@ -26,8 +26,16 @@ class Bot(openai.OpenAI):
             })
         
 
-    def get(self, request: str):
+    def get(
+            self, 
+            request: str,
+            previous_conversation: tuple[dict, dict] = None
+            ):
         context = copy.deepcopy(self.context)
+        if previous_conversation is not None:
+            previous_question, previous_answer = previous_conversation
+            context.append(previous_question)
+            context.append(previous_answer)
         context.append({
             "role": "user",
             "content": request
