@@ -11,39 +11,11 @@ Please, don't provide anything else than the code, no questions, no answers, no 
 Please, don't use random numbers, the puzzle must be deterministically answerable.
 """,
             additional_info = None,
-            model = "gpt-3.5-turbo"
+            model = "gpt-4"
         )
         self.tag = tag
         self.number_of_generated_questions = 0
         
-
-    
-    def generate_question(
-            self,
-            difficulty_change: int = 0
-        ):
-        if self.number_of_generated_questions == 0:
-            request = f"""
-Give me one python puzzle involving {self.tag}. It should have at most 5 lines of code.
-Store the value to be estimated in variable "result".
-"""
-        else:
-            if difficulty_change > 0:
-                request = """
-Very nice, but this time please give me something slightly more challenging.
-"""
-            if difficulty_change < 0:
-                request = """
-Very nice, but this one was too hard. Please give me something a little bit easier.
-"""
-            if difficulty_change == 0:
-                request = """
-Very nice, please give me next one, on same difficulty level.
-"""
-        self.number_of_generated_questions += 1
-        return self.get(
-            request = request
-        )
     def generate_question(self,
         previous_question: str = None,
         difficulty_change: int = 0
