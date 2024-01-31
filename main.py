@@ -18,19 +18,23 @@ def main():
     explanation_generator = ExplanationGenerator()
     fake_answers_generator = FakeAnswersGenerator()
     difficulty_estimator = DifficultyEstimator()
-
+    previous_question = None
 
     # creating question
-    puzzle = generate_complete_puzzle(
-        question_generator = question_generator,
-        explanation_generator = explanation_generator,
-        fake_answers_generator = fake_answers_generator,
-        difficulty_estimator = difficulty_estimator
-    )
-    print("Final puzzle")
-    ic(puzzle)
-    with open("puzzle.json", "w") as f:
-        json.dump(puzzle, f)
+    for i in range(5):
+        puzzle = generate_complete_puzzle(
+            question_generator = question_generator,
+            explanation_generator = explanation_generator,
+            fake_answers_generator = fake_answers_generator,
+            difficulty_estimator = difficulty_estimator,
+            previous_question = previous_question,
+            difficulty_change = 1
+            
+        )
+        print("Final puzzle")
+        ic(puzzle)
+        previous_question = puzzle["question"]
+
 
    
     
@@ -39,11 +43,16 @@ def generate_complete_puzzle(
         explanation_generator,
         fake_answers_generator,
         difficulty_estimator,
-        difficulty_change = 0     
+        previous_question = None,
+        difficulty_change = 0
+            
 ):
     
     while True:
-        original_question = question_generator.generate_question(difficulty_change = difficulty_change)
+        original_question = question_generator.generate_question(
+            previous_question = previous_question,
+            difficulty_change = difficulty_change
+            )
         question = extract_puzzle(original_question)
         real_answer, success = interpreter.get_real_answer(question)
         if not success:
