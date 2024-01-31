@@ -29,6 +29,7 @@ def main():
             ic(original_question, question)
             continue
         explanator_answer, explanation = explanation_generator.generate_explanation(question)
+        difficulty_estimator_answer, difficulty = difficulty_estimator.estimate_difficulty(question)
         
 
         # place to generate different answers from different bots
@@ -49,7 +50,7 @@ def main():
 
         answers = [
             explanator_answer,
-            #fake_answers_generator_answer
+            difficulty_estimator_answer
         ]
         if not interpreter.check_answers(
             real_answer = real_answer,
@@ -60,13 +61,13 @@ def main():
             continue
 
         
-        print(real_answer, difficulty_estimator.estimate_difficulty(question))
         with open("puzzle.json", "w") as puzzle:
             json.dump({
                 "question": question,
                 "real answer": real_answer,
                 "explanation": explanation,
-                "fake answers": fake_answers
+                "fake answers": fake_answers,
+                "difficulty": difficulty
             }, puzzle)
         break
 
