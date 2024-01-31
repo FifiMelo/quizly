@@ -27,7 +27,8 @@ def main():
         fake_answers_generator = fake_answers_generator,
         difficulty_estimator = difficulty_estimator
     )
-
+    print("Final puzzle")
+    ic(puzzle)
     with open("puzzle.json", "w") as f:
         json.dump(puzzle, f)
 
