@@ -19,8 +19,28 @@ def main():
     fake_answers_generator = FakeAnswersGenerator()
     difficulty_estimator = DifficultyEstimator()
 
-    difficulty_change = 0
+
     # creating question
+    puzzle = generate_complete_puzzle(
+        question_generator = question_generator,
+        explanation_generator = explanation_generator,
+        fake_answers_generator = fake_answers_generator,
+        difficulty_estimator = difficulty_estimator
+    )
+
+    with open("puzzle.json", "w") as f:
+        json.dump(puzzle, f)
+
+   
+    
+def generate_complete_puzzle(
+        question_generator,
+        explanation_generator,
+        fake_answers_generator,
+        difficulty_estimator,
+        difficulty_change = 0     
+):
+    
     while True:
         original_question = question_generator.generate_question(difficulty_change = difficulty_change)
         question = extract_puzzle(original_question)
@@ -59,22 +79,18 @@ def main():
             print("Answer of one of the bot seems incorrect")
             ic(question, real_answer, answers)
             continue
-
         
-        with open("puzzle.json", "w") as puzzle:
-            json.dump({
+        return {
                 "question": question,
                 "real answer": real_answer,
                 "explanation": explanation,
                 "fake answers": fake_answers,
                 "difficulty": difficulty
-            }, puzzle)
-        break
+            }
 
 
-            
     
-    
+
 
 
 
