@@ -25,11 +25,15 @@ and tell what is the value of varaible "result" at the end.
             self,
             question_code: str
     ):
+        
         query = self.get(question_code)
+
         explanation_index = query.find("explanation: ")
+
         answer_index = query.find("answer: ")
         if answer_index == -1:
             answer_index = query.find("Answer: ")
+
         answer = query[answer_index + len("answer: "):]
         explanation = query[explanation_index + len("explanation: "):answer_index]
         return answer, explanation
