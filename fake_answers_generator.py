@@ -18,7 +18,6 @@ fake_answer3: *third fake answer*
 Please, tell me what should return the following scripts, as well as the fake answers.
 """,
             model = "gpt-3.5-turbo",
-            continuous = False
         )
     
     

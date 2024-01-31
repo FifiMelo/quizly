@@ -18,7 +18,6 @@ Please, explain me what the script does,
 and tell what is the value of varaible "result" at the end.
 """,
             model = "gpt-3.5-turbo",
-            continuous = False
         )
     
     def generate_explanation(
