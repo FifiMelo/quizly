@@ -1,6 +1,7 @@
 from question_generator import QuestionGenerator
 from explanation_generator import ExplanationGenerator
 from fake_answers_generator import FakeAnswersGenerator
+from difficulty_estimator import DifficultyEstimator
 from icecream import ic
 from puzzle_extractor import extract_puzzle
 from dotenv import load_dotenv
@@ -16,6 +17,7 @@ def main():
     question_generator = QuestionGenerator(os.environ.get('TAG'))
     explanation_generator = ExplanationGenerator()
     fake_answers_generator = FakeAnswersGenerator()
+    difficulty_estimator = DifficultyEstimator()
 
     difficulty_change = 0
     # creating question
@@ -57,6 +59,8 @@ def main():
             ic(question, real_answer, answers)
             continue
 
+        
+        print(real_answer, difficulty_estimator.estimate_difficulty(question))
         with open("puzzle.json", "w") as puzzle:
             json.dump({
                 "question": question,
@@ -65,6 +69,7 @@ def main():
                 "fake answers": fake_answers
             }, puzzle)
         break
+
 
             
     
