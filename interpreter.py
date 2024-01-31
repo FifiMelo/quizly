@@ -53,7 +53,8 @@ def transform_answer(answer: str):
         'The value of the variable "result" at the end is',
         'The value of variable "result" at the end is',
         'The value of the variable "result" at the end will be',
-        'The value of the variable "result" will be'
+        'The value of the variable "result" will be',
+        'The value of the variable "result" at the end is'
     ]
     for phrase in phrases:
         if answer[:len(phrase)] == phrase:
