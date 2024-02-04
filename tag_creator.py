@@ -19,5 +19,8 @@ Do not provide anyting else than tags.
         query = self.get(
             request = question
         )
-        return query.split(',')
+        query.replace('tags:', '')
+        tags = query.split(',')
+
+        return [tag.strip() for tag in tags]
     
