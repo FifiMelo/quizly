@@ -2,9 +2,11 @@ from question_generator import QuestionGenerator
 from explanation_generator import ExplanationGenerator
 from fake_answers_generator import FakeAnswersGenerator
 from difficulty_estimator import DifficultyEstimator
+from tag_creator import TagCreator
 from icecream import ic
 from puzzle_extractor import extract_puzzle
 from dotenv import load_dotenv
+
 import interpreter
 import json
 import os
@@ -18,6 +20,7 @@ def main():
     explanation_generator = ExplanationGenerator()
     fake_answers_generator = FakeAnswersGenerator()
     difficulty_estimator = DifficultyEstimator()
+    tag_creator = TagCreator()
     previous_question = None
 
     # creating question
@@ -28,6 +31,7 @@ def main():
             fake_answers_generator = fake_answers_generator,
             difficulty_estimator = difficulty_estimator,
             previous_question = previous_question,
+            tag_creator = tag_creator,
             difficulty_change = 1
             
         )
@@ -43,6 +47,7 @@ def generate_complete_puzzle(
         explanation_generator,
         fake_answers_generator,
         difficulty_estimator,
+        tag_creator,
         previous_question = None,
         difficulty_change = 0
             
@@ -89,13 +94,16 @@ def generate_complete_puzzle(
             print("Answer of one of the bot seems incorrect")
             ic(question, real_answer, answers)
             continue
+
+        tags = tag_creator.create_tags(question)
         
         return {
                 "question": question,
                 "real answer": real_answer,
                 "explanation": explanation,
                 "fake answers": fake_answers,
-                "difficulty": difficulty
+                "difficulty": difficulty,
+                "tags": tags
             }
 
 
