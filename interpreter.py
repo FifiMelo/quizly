@@ -56,13 +56,16 @@ def transform_answer(answer: str):
         'The value of the variable "result" will be',
         'The value of the variable "result" at the end is',
         "The value of the variable 'result' at the end is",
+        'The value of the variable "result" at the end is:',
         "result:",
-        'The value of the variable "result" is'
+        'The value of the variable "result" is',
+        'result is'
     ]
     for phrase in phrases:
         if answer[:len(phrase)] == phrase:
             return answer[len(phrase):-1]
-    answer = answer.replace('\n', '')
+    
+    answer = answer.replace('\n', '').replace('`', '')
     return answer
 
 if __name__ == '__main__':
