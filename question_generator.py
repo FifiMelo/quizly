@@ -11,7 +11,7 @@ Please, don't provide anything else than the code, no questions, no answers, no 
 Please, don't use random numbers, the puzzle must be deterministically answerable.
 """,
             additional_info = None,
-            model = "gpt-4"
+            model = "gpt-3.5-turbo"
         )
         self.tag = tag
         self.number_of_generated_questions = 0
