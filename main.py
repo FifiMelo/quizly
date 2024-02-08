@@ -85,7 +85,7 @@ def generate_complete_puzzle(
 
         answers = [
             explanator_answer,
-            difficulty_estimator_answer
+            #difficulty_estimator_answer
         ]
         if not interpreter.check_answers(
             real_answer = real_answer,
