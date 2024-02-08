@@ -69,19 +69,20 @@ def generate_complete_puzzle(
 
         # place to generate different answers from different bots
         # TODO: update difficulty_change variable
+        if type(real_answer) is bool:
+            fake_answers = [not real_answer]
+        else:
+            while True:
+                _, fake_answers = fake_answers_generator.generate_fake_answers(question)
 
-
-        while True:
-            _, fake_answers = fake_answers_generator.generate_fake_answers(question)
-
-            if interpreter.check_answers(
-                real_answer = real_answer,
-                answers = fake_answers,
-                correct_answers = False
-            ):
-                break
-            print("One of the fake answers seems to be correct, creating new fake answers")
-            ic(question, real_answer, fake_answers)
+                if interpreter.check_answers(
+                    real_answer = real_answer,
+                    answers = fake_answers,
+                    correct_answers = False
+                ):
+                    break
+                print("One of the fake answers seems to be correct, creating new fake answers")
+                ic(question, real_answer, fake_answers)
 
         answers = [
             explanator_answer,
