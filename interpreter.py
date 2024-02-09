@@ -63,10 +63,10 @@ def transform_answer(answer: str):
         '*what is the value of variable "result" at the end*'
     ]
     for phrase in phrases:
-        if answer[:len(phrase)] == phrase:
-            return answer[len(phrase):-1]
-    
+        answer = answer.replace(phrase, '')
     answer = answer.replace('\n', '').replace('`', '')
+    if answer[-1] == ".":
+        answer = answer[:-1]
     return answer
 
 if __name__ == '__main__':
