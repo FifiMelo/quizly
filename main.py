@@ -13,31 +13,11 @@ import os
 
 
 def main():
+    load_dotenv(override=True)
+    batch = list(generate_batch(os.environ.get('TAG')))
+    with open("batch.json", "w") as file:
+        json.dump(batch, file)
 
-    load_dotenv()
-    # initialization of bots
-    question_generator = QuestionGenerator(os.environ.get('TAG'))
-    explanation_generator = ExplanationGenerator()
-    fake_answers_generator = FakeAnswersGenerator()
-    difficulty_estimator = DifficultyEstimator()
-    tag_creator = TagCreator()
-    previous_question = None
-
-    # creating question
-    for i in range(5):
-        puzzle = generate_complete_puzzle(
-            question_generator = question_generator,
-            explanation_generator = explanation_generator,
-            fake_answers_generator = fake_answers_generator,
-            difficulty_estimator = difficulty_estimator,
-            previous_question = previous_question,
-            tag_creator = tag_creator,
-            difficulty_change = 1
-            
-        )
-        print("Final puzzle")
-        ic(puzzle)
-        previous_question = puzzle["question"]
 
 
    
@@ -63,7 +43,7 @@ def generate_complete_puzzle(
         if not success:
             ic(original_question, question)
             continue
-        explanator_answer, explanation = explanation_generator.generate_explanation(question)
+        explanator_answer, explanation, explanation_query = explanation_generator.generate_explanation(question)
         difficulty_estimator_answer, difficulty = difficulty_estimator.estimate_difficulty(question)
         
 
@@ -81,8 +61,6 @@ def generate_complete_puzzle(
                     correct_answers = False
                 ):
                     break
-                print("One of the fake answers seems to be correct, creating new fake answers")
-                ic(question, real_answer, fake_answers)
 
         answers = [
             explanator_answer,
@@ -93,7 +71,7 @@ def generate_complete_puzzle(
             answers = answers
             ):
             print("Answer of one of the bot seems incorrect")
-            ic(question, real_answer, answers)
+            ic(question, real_answer, answers, explanation_query)
             continue
 
         tags = tag_creator.create_tags(question)
@@ -108,7 +86,29 @@ def generate_complete_puzzle(
             }
 
 
-    
+def generate_batch(tag, n = 5):
+    question_generator = QuestionGenerator(os.environ.get('TAG'))
+    explanation_generator = ExplanationGenerator()
+    fake_answers_generator = FakeAnswersGenerator()
+    difficulty_estimator = DifficultyEstimator()
+    tag_creator = TagCreator()
+    previous_question = None
+
+    for i in range(n):
+        puzzle = generate_complete_puzzle(
+            question_generator = question_generator,
+            explanation_generator = explanation_generator,
+            fake_answers_generator = fake_answers_generator,
+            difficulty_estimator = difficulty_estimator,
+            previous_question = previous_question,
+            tag_creator = tag_creator,
+            difficulty_change = 1
+            
+        )
+        previous_question = puzzle["question"]
+        yield puzzle
+
+
 
 
 

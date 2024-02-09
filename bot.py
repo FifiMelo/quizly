@@ -10,7 +10,7 @@ class Bot(openai.OpenAI):
             additional_info: str = None, 
             model: int = "gpt-3.5-turbo",
         ):
-        load_dotenv()
+        load_dotenv(override=True)
         super(Bot, self).__init__(api_key = os.environ.get("OPENAI_KEY"))
         self.model = model
         self.context = [
