@@ -7,6 +7,8 @@ class ExplanationGenerator(Bot):
             system_info = """
 Your task is to explain what python script does,
 and then predict what is the value of variable "result".
+After each line provide the value of each variable, so that the explanation is clear, correct
+and easily understandable.
 Answer should be only value of the variable "result", do not provide anything else.
 Please give answer in format:
 explanation: *explanation*
@@ -35,5 +37,5 @@ and tell what is the value of variable "result" at the end.
 
         answer = query[answer_index + len("answer: "):]
         explanation = query[explanation_index + len("explanation: "):answer_index]
-        return answer, explanation
+        return answer, explanation, query
 
