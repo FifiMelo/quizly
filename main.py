@@ -6,6 +6,7 @@ from tag_creator import TagCreator
 from icecream import ic
 from puzzle_extractor import extract_puzzle
 from dotenv import load_dotenv
+from database import DatabaseClient
 
 import interpreter
 import json
@@ -14,9 +15,10 @@ import os
 
 def main():
     load_dotenv(override=True)
-    batch = list(generate_batch(os.environ.get('TAG')))
-    with open("batch.json", "w") as file:
-        json.dump(batch, file)
+    database_client = DatabaseClient()
+    for question in generate_batch(os.environ.get('TAG')):
+        database_client.add_question(question)
+
 
 
 
@@ -86,7 +88,7 @@ def generate_complete_puzzle(
             }
 
 
-def generate_batch(tag, n = 5):
+def generate_batch(tag, n = 100):
     question_generator = QuestionGenerator(os.environ.get('TAG'))
     explanation_generator = ExplanationGenerator()
     fake_answers_generator = FakeAnswersGenerator()
