@@ -1,5 +1,7 @@
 __pycache__/
 
+natural_language_processing/
+
 puzzle.json
 testing.py
 .env
