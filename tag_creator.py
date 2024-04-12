@@ -1,5 +1,4 @@
 from bot import Bot
-from icecream import ic
 
 class TagCreator(Bot):
     def __init__(self):

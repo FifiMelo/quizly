@@ -1,5 +1,4 @@
 from bot import Bot
-from icecream import ic
 
 class FakeAnswersGenerator(Bot):
     def __init__(self):

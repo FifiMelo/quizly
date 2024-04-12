@@ -101,7 +101,7 @@ def generate_batch(tag, n = 100):
             
         )
 
-        difficulty = puzzle["difficulty"]
+        difficulty = int(puzzle["difficulty"])
         if difficulty < 40:
             difficulty_change = 1
         elif difficulty > 80:

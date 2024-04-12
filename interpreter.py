@@ -1,4 +1,4 @@
-from icecream import ic
+
 
 def get_real_answer(code: str):
 
@@ -38,7 +38,6 @@ def check_answers(real_answer, answers, correct_answers = True):
                 print(e, answer)
                 exec(f"""var = "{answer}" """, answer_dict)
         except Exception as e:
-            ic(e, real_answer, answers)
             return False
 
         if (answer_dict["var"] == real_answer) != correct_answers:

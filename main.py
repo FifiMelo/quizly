@@ -1,9 +1,15 @@
 from batch_creator import generate_batch
+from database import DatabaseClient
 
 
 
 def main():
-    pass
+    dbClient = DatabaseClient()
+    while True:
+        tag = dbClient.get_tag()
+        for puzzle in generate_batch(tag):
+                dbClient.add_question(puzzle)
+        
 
 
 
