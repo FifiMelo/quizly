@@ -1,5 +1,10 @@
 __pycache__/
 natural_language_processing/
 
-.env
+natural_language_processing/
+
+puzzle.json
 testing.py
+.env
+todo.txt
+batch.json
