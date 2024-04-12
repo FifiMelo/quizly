@@ -9,6 +9,7 @@ Your task is to create python puzzle chunk.
 The chunk should end in statement result = ..., variable that will store the result of the code.
 Please, don't provide anything else than the code, no questions, no answers, no hints, nothing.
 Please, don't use random numbers, the puzzle must be deterministically answerable.
+Please, make the puzzle computationally simple, good for humans.
 """,
             additional_info = None,
             model = "gpt-3.5-turbo"
