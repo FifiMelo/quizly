@@ -1,16 +1,23 @@
-from question_generator import QuestionGenerator
-from explanation_generator import ExplanationGenerator
-from puzzle import Puzzle
-from icecream import ic
+from batch_creator import generate_batch
+from database import DatabaseClient
+
+
 
 def main():
+    dbClient = DatabaseClient()
+    while True:
+        tag = dbClient.get_tag()
+        for puzzle in generate_batch(tag):
+                dbClient.add_question(puzzle)
+        
 
-    question_generator = QuestionGenerator("modulo operator")
-    explanation_generator = ExplanationGenerator()
-    question = question_generator.generate_question()
-    answer, explanation = explanation_generator.generate_explanation(question)
-    ic(question)
-    ic(answer, explanation)
+
+
+
+
+
+
+
 
 
 
