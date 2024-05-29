@@ -1,8 +1,6 @@
 import openai
 import copy
-import os
-from dotenv import load_dotenv
-
+import json
 class Bot(openai.OpenAI):
     def __init__(
             self, 
@@ -10,9 +8,7 @@ class Bot(openai.OpenAI):
             additional_info: str = None, 
             model: int = "gpt-3.5-turbo",
         ):
-        load_dotenv(override=True)
         super(Bot, self).__init__()
-        self.api_key = api_key = os.environ.get("OPENAI_API_KEY")
         self.model = model
         self.context = [
             {
