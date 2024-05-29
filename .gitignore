@@ -10,3 +10,4 @@ testing.py
 .env
 todo.txt
 batch.json
+env.json
