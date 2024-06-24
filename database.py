@@ -1,8 +1,6 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from pymongo import ASCENDING
-import os
-from dotenv import load_dotenv
 import certifi
 
 
@@ -10,13 +8,13 @@ import certifi
 class DatabaseClient(MongoClient):
     def __init__(
             self,
+            key: str,
             database_name = "Quiz",
             question_collection_name = "Questions",
             tags_collection_name = "Tags"
         ):
-        load_dotenv(override=True)
         super(DatabaseClient, self).__init__(
-            os.environ.get("mongodb_uri"),
+            key,
             server_api = ServerApi('1'),
             tlsCAFile = certifi.where()
             )

@@ -8,7 +8,7 @@ def main():
     with open("./env.json") as file:
         data = json.load(file)
     openai.api_key = data["OPENAI_API_KEY"]
-    dbClient = DatabaseClient()
+    dbClient = DatabaseClient(key = data["mongodb_uri"])
     while True:
         tag = dbClient.get_tag()
         for puzzle in generate_batch(tag):
