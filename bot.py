@@ -1,7 +1,8 @@
 import openai
 import copy
 import json
-class Bot(openai.OpenAI):
+
+class Bot():
     def __init__(
             self, 
             system_info: str, 
@@ -37,11 +38,11 @@ class Bot(openai.OpenAI):
             "role": "user",
             "content": request
         })
-        stream = self.chat.completions.create(
+        stream = openai.ChatCompletion.create(
             model=self.model,
             messages=context
         )
-        answer = stream.choices[0].message.content
+        answer = stream.choices[0].message['content']
 
         return answer
 

@@ -1,7 +1,7 @@
 from bot import Bot
 
 class FakeAnswersGenerator(Bot):
-    def __init__(self, api_key: str):
+    def __init__(self):
         super(FakeAnswersGenerator, self).__init__(
             system_info = """
 Your task is to create answers to a python script puzzle,

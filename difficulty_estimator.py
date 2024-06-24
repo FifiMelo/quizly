@@ -14,8 +14,7 @@ Please do not provide anything else.
 """,
             additional_info ="""
 Please, tell me what should return the following scripts, as well as the difficulty.
-""",
-            model = "gpt-3.5-turbo"
+"""
         )
     def estimate_difficulty(
             self, 
